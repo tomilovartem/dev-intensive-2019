@@ -38,10 +38,12 @@ enum class TimeUnits {
     HOUR,
     DAY,
     MONTH,
-    YEAR
-}
+    YEAR;
 
-enum class TimeUnitsFull
+    fun plural(value: Int):String{
+        return value.toString()+ " " +num2date(value, this)
+    }
+}
 
 fun num2date(value: Int, units: TimeUnits): String {
     return when (units) {
@@ -62,8 +64,8 @@ fun Date.humanizeDiff(date: Date = Date()):String {
     val after = if(timeDiff>0) " назад" else ""
 
     return "$before${when(absTimeDiff) {
-        in 0..1 * SECOND -> return "только что"
-        in 1 * SECOND +1 ..45 * SECOND -> "несколько ${num2date(5, TimeUnits.SECOND)}"
+        in 0..SECOND -> return "только что"
+        in SECOND +1 ..45 * SECOND -> "несколько ${num2date(5, TimeUnits.SECOND)}"
         in 45 * SECOND + 1..75 * SECOND -> num2date(1, TimeUnits.MINUTE)
         in 75 * SECOND + 1..45 * MINUTE -> "${(absTimeDiff / MINUTE).toInt()} ${num2date((absTimeDiff / MINUTE).toInt(), TimeUnits.MINUTE)}"
         in 45 * MINUTE + 1..75 * MINUTE -> num2date(1, TimeUnits.HOUR)
