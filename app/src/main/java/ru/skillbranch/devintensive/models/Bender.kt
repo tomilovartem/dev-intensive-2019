@@ -18,7 +18,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         return if (question.validateAnswer(answer)) {
             if (question.answers.contains(answer.toLowerCase())) {
                 question = question.nextQuestion()
-                "Отлично - ты справился!\n${question.question}" to status.color
+                "Отлично - ты справился\n${question.question}" to status.color
             } else {
                 if(question == Question.IDLE) return question.question to status.color
                 status = status.nextStatus()
@@ -26,7 +26,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                     question = Question.NAME
                     "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
                 } else {
-                    "Это не правильный ответ!\n${question.question}" to status.color
+                    "Это неправильный ответ\n${question.question}" to status.color
                 }
             }
         } else {
